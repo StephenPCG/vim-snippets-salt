@@ -29,7 +29,7 @@ def list_states_modules():
         module = importlib.import_module("salt.states." + module_name)
         yield module
 
-def list_module_funcs(module, ignore_functions=[]):
+def list_module_funcs(module):
     """ Scan for all states functions in a module.
 
     Returns a list of tupple:
@@ -37,9 +37,7 @@ def list_module_funcs(module, ignore_functions=[]):
     """
     module_name = module.__name__.replace("salt.states.", "")
     for (name, member) in inspect.getmembers(module):
-        if inspect.isfunction(member) and not name.startswith("_") \
-                and name not in ignore_functions:
-
+        if inspect.isfunction(member) and not name.startswith("_"):
             args, _, _, defaults = inspect.getargspec(member)
 
             if defaults is None:
@@ -50,7 +48,7 @@ def list_module_funcs(module, ignore_functions=[]):
 
             yield (module_name, name, zip(args, defaults))
 
-def gen_snippet(module_name, function_name, argspec):
+def gen_snippet(module_name, function_name, argspec, ignore_args):
     """ Generate snippet for given function.
     """
     lines = []
@@ -59,6 +57,8 @@ def gen_snippet(module_name, function_name, argspec):
     lines.append("    - %s" % function_name)
     idx = 0
     for arg, default in argspec:
+        if arg in ignore_args:
+            continue
         idx += 1
         if default == '':
             default = "''"
@@ -73,8 +73,8 @@ def parseargs():
     parser = argparse.ArgumentParser()
     parser.add_argument("-e", "--engine", default="neosnippet",
             help="snippet engine: neosnippet, ultisnips")
-    parser.add_argument("-i", "--ignore-function", default=[],
-            action="append", help="ignore functions, may be repeated")
+    parser.add_argument("-i", "--ignore-args", default=[],
+            action="append", help="ignore args, may be repeated")
     parser.add_argument("-p", "--salt-path", default=None,
             help="salt source path")
 
@@ -97,7 +97,7 @@ def main():
     with open(output_file, "w+") as fp:
         for module in list_states_modules():
             for module_name, function_name, argspec in list_module_funcs(module):
-                fp.write(gen_snippet(module_name, function_name, argspec))
+                fp.write(gen_snippet(module_name, function_name, argspec, args.ignore_args))
 
 if __name__ == '__main__':
     main()

@@ -1,315 +1,432 @@
-snippet archive.extracted
-  archive:
-    - extracted
-    - name: ${1:None}
-    - source: ${2:None}
-    - archive_format: ${3:None}
-snippet rabbitmq_plugin.disabled
-  rabbitmq_plugin:
-    - disabled
-    - name: ${1:None}
-snippet rabbitmq_plugin.enabled
-  rabbitmq_plugin:
-    - enabled
-    - name: ${1:None}
+snippet host.absent
+  host:
+    - absent
+snippet host.present
+  host:
+    - present
+snippet rbenv.absent
+  rbenv:
+    - absent
+    - runas: ${1:None}
+snippet rbenv.installed
+  rbenv:
+    - installed
+    - default: ${1:None}
+    - runas: ${2:None}
+snippet memcached.absent
+  memcached:
+    - absent
+    - value: ${1:127.0.0.1}
+    - host: ${2:11211}
+    - port: ${3:0}
+snippet memcached.managed
+  memcached:
+    - managed
+    - value: ${1:127.0.0.1}
+    - host: ${2:11211}
+    - port: ${3:0}
+    - time: ${4:0}
+snippet powerpath.license_absent
+  powerpath:
+    - license_absent
+snippet powerpath.license_present
+  powerpath:
+    - license_present
+snippet gem.installed
+  gem:
+    - installed
+    - ruby: ${1:None}
+    - runas: ${2:None}
+    - user: ${3:None}
+    - version: ${4:False}
+    - rdoc: ${5:False}
+snippet gem.removed
+  gem:
+    - removed
+    - ruby: ${1:None}
+    - runas: ${2:None}
+snippet hg.latest
+  hg:
+    - latest
+    - rev: ${1:None}
+    - target: ${2:False}
+    - clean: ${3:None}
+    - runas: ${4:None}
+    - user: ${5:False}
+    - force: ${6:False}
+snippet aws_sqs.absent
+  aws_sqs:
+    - absent
+    - region: ${1:False}
+snippet aws_sqs.exists
+  aws_sqs:
+    - exists
+    - region: ${1:False}
+snippet win_network.managed
+  win_network:
+    - managed
+    - dns_proto: ${1:None}
+    - dns_servers: ${2:None}
+    - ip_proto: ${3:None}
+    - ip_addrs: ${4:None}
+    - gateway: ${5:True}
+snippet openstack_config.absent
+  openstack_config:
+    - absent
+snippet openstack_config.present
+  openstack_config:
+    - present
+snippet pagerduty.create_event
+  pagerduty:
+    - create_event
+snippet virtualenv_mod.manage
+  virtualenv_mod:
+    - manage
+    - venv_bin: ${1:None}
+    - requirements: ${2:None}
+    - no_site_packages: ${3:False}
+    - system_site_packages: ${4:False}
+    - distribute: ${5:False}
+    - use_wheel: ${6:False}
+    - clear: ${7:None}
+    - python: ${8:None}
+    - extra_search_dir: ${9:None}
+    - never_download: ${10:None}
+    - prompt: ${11:None}
+    - user: ${12:None}
+    - runas: ${13:False}
+    - no_chown: ${14:None}
+    - cwd: ${15:None}
+    - index_url: ${16:None}
+    - extra_index_url: ${17:False}
+    - pre_releases: ${18:False}
+    - no_deps: ${19:None}
+snippet virtualenv_mod.managed
+  virtualenv_mod:
+    - managed
+    - venv_bin: ${1:None}
+    - requirements: ${2:None}
+    - no_site_packages: ${3:False}
+    - system_site_packages: ${4:False}
+    - distribute: ${5:False}
+    - use_wheel: ${6:False}
+    - clear: ${7:None}
+    - python: ${8:None}
+    - extra_search_dir: ${9:None}
+    - never_download: ${10:None}
+    - prompt: ${11:None}
+    - user: ${12:None}
+    - runas: ${13:False}
+    - no_chown: ${14:None}
+    - cwd: ${15:None}
+    - index_url: ${16:None}
+    - extra_index_url: ${17:False}
+    - pre_releases: ${18:False}
+    - no_deps: ${19:None}
+snippet postgres_user.absent
+  postgres_user:
+    - absent
+    - runas: ${1:None}
+    - user: ${2:None}
+    - maintenance_db: ${3:None}
+    - db_password: ${4:None}
+    - db_host: ${5:None}
+    - db_port: ${6:None}
+snippet postgres_user.present
+  postgres_user:
+    - present
+    - createdb: ${1:None}
+    - createroles: ${2:None}
+    - createuser: ${3:None}
+    - encrypted: ${4:None}
+    - superuser: ${5:None}
+    - replication: ${6:None}
+    - inherit: ${7:None}
+    - login: ${8:None}
+    - password: ${9:None}
+    - groups: ${10:None}
+    - runas: ${11:None}
+    - user: ${12:None}
+    - maintenance_db: ${13:None}
+    - db_password: ${14:None}
+    - db_host: ${15:None}
+    - db_port: ${16:None}
+snippet rabbitmq_cluster.join
+  rabbitmq_cluster:
+    - join
+    - host: ${1:None}
 snippet rabbitmq_policy.absent
   rabbitmq_policy:
     - absent
-    - name: ${1:/}
-    - vhost: ${2:None}
+    - vhost: ${1:None}
 snippet rabbitmq_policy.present
   rabbitmq_policy:
     - present
-    - name: ${1:0}
-    - pattern: ${2:/}
-    - definition: ${3:None}
-snippet process.absent
-  process:
-    - absent
-snippet timezone.system
-  timezone:
-    - system
-    - name: ${1:True}
+    - pattern: ${1:/}
+    - definition: ${2:None}
+snippet selinux.boolean
+  selinux:
+    - boolean
+snippet selinux.mode
+  selinux:
+    - mode
+snippet pip_state.installed
+  pip_state:
+    - installed
+    - pip_bin: ${1:None}
+    - requirements: ${2:None}
+    - env: ${3:None}
+    - bin_env: ${4:False}
+    - use_wheel: ${5:None}
+    - log: ${6:None}
+    - proxy: ${7:None}
+    - timeout: ${8:None}
+    - repo: ${9:None}
+    - editable: ${10:None}
+    - find_links: ${11:None}
+    - index_url: ${12:None}
+    - extra_index_url: ${13:False}
+    - no_index: ${14:None}
+    - mirrors: ${15:None}
+    - build: ${16:None}
+    - target: ${17:None}
+    - download: ${18:None}
+    - download_cache: ${19:None}
+    - source: ${20:False}
+    - upgrade: ${21:False}
+    - force_reinstall: ${22:False}
+    - ignore_installed: ${23:None}
+    - exists_action: ${24:False}
+    - no_deps: ${25:False}
+    - no_install: ${26:False}
+    - no_download: ${27:None}
+    - install_options: ${28:None}
+    - global_options: ${29:None}
+    - user: ${30:None}
+    - runas: ${31:False}
+    - no_chown: ${32:None}
+    - cwd: ${33:False}
+    - activate: ${34:False}
+snippet pip_state.removed
+  pip_state:
+    - removed
+    - requirements: ${1:None}
+    - bin_env: ${2:None}
+    - log: ${3:None}
+    - proxy: ${4:None}
+    - timeout: ${5:None}
+    - user: ${6:None}
+    - runas: ${7:None}
+snippet rvm.gemset_present
+  rvm:
+    - gemset_present
+    - ruby: ${1:None}
+    - runas: ${2:None}
+snippet rvm.installed
+  rvm:
+    - installed
+    - default: ${1:None}
+    - runas: ${2:None}
+snippet apt.held
+  apt:
+    - held
+snippet xmpp.send_msg
+  xmpp:
+    - send_msg
+snippet rabbitmq_plugin.disabled
+  rabbitmq_plugin:
+    - disabled
+snippet rabbitmq_plugin.enabled
+  rabbitmq_plugin:
+    - enabled
 snippet network.managed
   network:
     - managed
-    - name: ${1:True}
 snippet network.routes
   network:
     - routes
 snippet network.system
   network:
     - system
-snippet cmd.call
-  cmd:
-    - call
-    - name: ${1:()}
-    - func: ${2:None}
-    - args: ${3:None}
-    - kws: ${4:None}
-snippet cmd.mod_watch
-  cmd:
-    - mod_watch
-snippet cmd.run
-  cmd:
-    - run
-    - name: ${1:None}
-    - onlyif: ${2:None}
-    - unless: ${3:None}
-    - cwd: ${4:None}
-    - user: ${5:None}
-    - group: ${6:None}
-    - shell: ${7:None}
-    - env: ${8:False}
-    - stateful: ${9:None}
-    - umask: ${10:info}
-    - output_loglevel: ${11:False}
-    - quiet: ${12:None}
-snippet cmd.script
-  cmd:
-    - script
-    - name: ${1:None}
-    - source: ${2:None}
-    - template: ${3:None}
-    - onlyif: ${4:None}
-    - unless: ${5:None}
-    - cwd: ${6:None}
-    - user: ${7:None}
-    - group: ${8:None}
-    - shell: ${9:None}
-    - env: ${10:False}
-    - stateful: ${11:None}
-    - umask: ${12:None}
-snippet cmd.wait
-  cmd:
-    - wait
-    - name: ${1:None}
-    - onlyif: ${2:None}
-    - unless: ${3:None}
-    - cwd: ${4:None}
-    - user: ${5:None}
-    - group: ${6:None}
-    - shell: ${7:()}
-    - env: ${8:False}
-    - stateful: ${9:None}
-snippet cmd.wait_call
-  cmd:
-    - wait_call
-    - name: ${1:()}
-    - func: ${2:None}
-    - args: ${3:None}
-    - kws: ${4:None}
-    - onlyif: ${5:False}
-snippet cmd.wait_script
-  cmd:
-    - wait_script
-    - name: ${1:None}
-    - source: ${2:None}
-    - template: ${3:None}
-    - onlyif: ${4:None}
-    - unless: ${5:None}
-    - cwd: ${6:None}
-    - user: ${7:None}
-    - group: ${8:None}
-    - shell: ${9:None}
-    - env: ${10:False}
-    - stateful: ${11:None}
-snippet cmd.watch
-  cmd:
-    - watch
-    - name: ${1:None}
-    - onlyif: ${2:None}
-    - unless: ${3:None}
-    - cwd: ${4:None}
-    - user: ${5:None}
-    - group: ${6:None}
-    - shell: ${7:()}
-    - env: ${8:False}
-    - stateful: ${9:None}
-snippet rabbitmq_cluster.join
-  rabbitmq_cluster:
-    - join
-    - name: ${1:rabbit}
-    - host: ${2:None}
-snippet debconfmod.set
-  debconfmod:
-    - set
-snippet debconfmod.set_file
-  debconfmod:
-    - set_file
-snippet gem.installed
-  gem:
-    - installed
-    - name: ${1:None}
-    - ruby: ${2:None}
-    - runas: ${3:None}
-    - user: ${4:None}
-    - version: ${5:False}
-    - rdoc: ${6:False}
-snippet gem.removed
-  gem:
-    - removed
-    - name: ${1:None}
-    - ruby: ${2:None}
-    - runas: ${3:None}
-snippet hg.latest
-  hg:
-    - latest
-    - name: ${1:None}
-    - rev: ${2:None}
-    - target: ${3:False}
-    - clean: ${4:None}
-    - runas: ${5:None}
-    - user: ${6:False}
-    - force: ${7:False}
+snippet saltmod.function
+  saltmod:
+    - function
+    - tgt: ${1:None}
+    - ssh: ${2:''}
+    - tgt_type: ${3:()}
+snippet saltmod.state
+  saltmod:
+    - state
+    - tgt: ${1:None}
+    - ssh: ${2:''}
+    - tgt_type: ${3:None}
+    - ret: ${4:None}
+    - highstate: ${5:None}
+    - sls: ${6:False}
+    - env: ${7:''}
+    - test: ${8:0}
 snippet group.absent
   group:
     - absent
 snippet group.present
   group:
     - present
-    - name: ${1:None}
-    - gid: ${2:False}
-snippet lvs_server.absent
-  lvs_server:
+    - gid: ${1:False}
+snippet ports.installed
+  ports:
+    - installed
+snippet makeconf.absent
+  makeconf:
     - absent
-    - name: ${1:None}
-    - protocol: ${2:None}
-    - service_address: ${3:None}
-snippet lvs_server.present
-  lvs_server:
+snippet makeconf.present
+  makeconf:
     - present
-    - name: ${1:None}
-    - protocol: ${2:None}
-    - service_address: ${3:None}
-    - server_address: ${4:dr}
-    - packet_forward_method: ${5:1}
-snippet lvs_service.absent
-  lvs_service:
-    - absent
-    - name: ${1:None}
-    - protocol: ${2:None}
-snippet lvs_service.present
-  lvs_service:
-    - present
-    - name: ${1:None}
-    - protocol: ${2:None}
-    - service_address: ${3:wlc}
-snippet iptables.append
-  iptables:
-    - append
-    - name: ${1:ipv4}
-snippet iptables.chain_absent
-  iptables:
-    - chain_absent
-    - name: ${1:filter}
-    - table: ${2:ipv4}
-snippet iptables.chain_present
-  iptables:
-    - chain_present
-    - name: ${1:filter}
-    - table: ${2:ipv4}
-snippet iptables.delete
-  iptables:
-    - delete
-    - name: ${1:ipv4}
-snippet iptables.flush
-  iptables:
-    - flush
-    - name: ${1:ipv4}
-snippet iptables.insert
-  iptables:
-    - insert
-    - name: ${1:ipv4}
-snippet iptables.set_policy
-  iptables:
-    - set_policy
-    - name: ${1:ipv4}
-snippet selinux.boolean
-  selinux:
-    - boolean
-    - name: ${1:False}
-snippet selinux.mode
-  selinux:
-    - mode
+    - value: ${1:None}
+    - contains: ${2:None}
 snippet mdadm.absent
   mdadm:
     - absent
 snippet mdadm.present
   mdadm:
     - present
-    - name: ${1:None}
-snippet composer.installed
-  composer:
-    - installed
-    - name: ${1:None}
-    - composer: ${2:None}
-    - php: ${3:None}
-    - runas: ${4:None}
-    - user: ${5:None}
-    - prefer_source: ${6:None}
-    - prefer_dist: ${7:None}
-    - no_scripts: ${8:None}
-    - no_plugins: ${9:None}
-    - optimize: ${10:None}
-    - no_dev: ${11:/root}
+snippet win_dns_client.dns_dhcp
+  win_dns_client:
+    - dns_dhcp
+snippet win_dns_client.dns_exists
+  win_dns_client:
+    - dns_exists
+    - servers: ${1:Local Area Connection}
+snippet lvs_service.absent
+  lvs_service:
+    - absent
+    - protocol: ${1:None}
+snippet lvs_service.present
+  lvs_service:
+    - present
+    - protocol: ${1:None}
+    - service_address: ${2:wlc}
+snippet ddns.absent
+  ddns:
+    - absent
+    - zone: ${1:None}
+snippet ddns.present
+  ddns:
+    - present
+snippet at.absent
+  at:
+    - absent
+snippet at.present
+  at:
+    - present
+    - timespec: ${1:None}
+    - tag: ${2:None}
+    - runas: ${3:None}
+snippet ssh_auth.absent
+  ssh_auth:
+    - absent
+    - user: ${1:''}
+    - enc: ${2:None}
+    - comment: ${3:.ssh/authorized_keys}
+snippet ssh_auth.present
+  ssh_auth:
+    - present
+    - user: ${1:''}
+    - enc: ${2:''}
+    - comment: ${3:None}
+    - source: ${4:.ssh/authorized_keys}
 snippet pkg.installed
   pkg:
     - installed
-    - name: ${1:None}
-    - version: ${2:None}
-    - refresh: ${3:None}
-    - fromrepo: ${4:False}
-    - skip_verify: ${5:False}
-    - skip_suggestions: ${6:None}
-    - pkgs: ${7:None}
+    - version: ${1:None}
+    - refresh: ${2:None}
+    - fromrepo: ${3:False}
+    - skip_verify: ${4:False}
+    - skip_suggestions: ${5:None}
+    - pkgs: ${6:None}
 snippet pkg.latest
   pkg:
     - latest
-    - name: ${1:None}
-    - refresh: ${2:None}
-    - fromrepo: ${3:False}
-    - skip_verify: ${4:None}
+    - refresh: ${1:None}
+    - fromrepo: ${2:False}
+    - skip_verify: ${3:None}
 snippet pkg.mod_init
   pkg:
     - mod_init
 snippet pkg.purged
   pkg:
     - purged
-    - name: ${1:None}
 snippet pkg.removed
   pkg:
     - removed
-    - name: ${1:None}
-snippet ntp.managed
-  ntp:
-    - managed
-    - name: ${1:None}
-snippet incron.absent
-  incron:
+snippet mongodb_user.absent
+  mongodb_user:
     - absent
-    - name: ${1:root}
-snippet incron.present
-  incron:
+    - user: ${1:None}
+    - password: ${2:None}
+    - host: ${3:None}
+    - port: ${4:admin}
+snippet mongodb_user.present
+  mongodb_user:
     - present
-    - name: ${1:root}
-snippet mysql_user.absent
-  mysql_user:
+    - passwd: ${1:None}
+    - database: ${2:None}
+    - user: ${3:None}
+    - password: ${4:None}
+snippet locale.system
+  locale:
+    - system
+snippet keystone.role_absent
+  keystone:
+    - role_absent
+snippet keystone.role_present
+  keystone:
+    - role_present
+snippet keystone.service_absent
+  keystone:
+    - service_absent
+snippet keystone.service_present
+  keystone:
+    - service_present
+    - service_type: ${1:None}
+snippet keystone.tenant_absent
+  keystone:
+    - tenant_absent
+snippet keystone.tenant_present
+  keystone:
+    - tenant_present
+    - description: ${1:True}
+    - enabled: ${2:None}
+snippet keystone.user_absent
+  keystone:
+    - user_absent
+snippet keystone.user_present
+  keystone:
+    - user_present
+    - password: ${1:True}
+    - email: ${2:None}
+    - tenant: ${3:None}
+snippet lvs_server.absent
+  lvs_server:
     - absent
-    - name: ${1:localhost}
-snippet mysql_user.present
-  mysql_user:
+    - protocol: ${1:None}
+    - service_address: ${2:None}
+snippet lvs_server.present
+  lvs_server:
     - present
-    - name: ${1:localhost}
-    - host: ${2:None}
-    - password: ${3:None}
-    - password_hash: ${4:False}
-    - allow_passwordless: ${5:False}
+    - protocol: ${1:None}
+    - service_address: ${2:None}
+    - server_address: ${3:dr}
+    - packet_forward_method: ${4:1}
+snippet debconfmod.set
+  debconfmod:
+    - set
+snippet debconfmod.set_file
+  debconfmod:
+    - set_file
 snippet service.dead
   service:
     - dead
-    - name: ${1:None}
-    - enable: ${2:None}
+    - enable: ${1:None}
 snippet service.disabled
   service:
     - disabled
@@ -319,111 +436,26 @@ snippet service.enabled
 snippet service.mod_watch
   service:
     - mod_watch
-    - name: ${1:None}
-    - sfun: ${2:None}
-    - sig: ${3:False}
-    - reload: ${4:False}
+    - sfun: ${1:None}
+    - sig: ${2:False}
+    - reload: ${3:False}
 snippet service.running
   service:
     - running
-    - name: ${1:None}
-    - enable: ${2:None}
-snippet memcached.absent
-  memcached:
+    - enable: ${1:None}
+snippet win_firewall.disabled
+  win_firewall:
+    - disabled
+snippet mysql_user.absent
+  mysql_user:
     - absent
-    - name: ${1:None}
-    - value: ${2:127.0.0.1}
-    - host: ${3:11211}
-    - port: ${4:0}
-snippet memcached.managed
-  memcached:
-    - managed
-    - name: ${1:None}
-    - value: ${2:127.0.0.1}
-    - host: ${3:11211}
-    - port: ${4:0}
-    - time: ${5:0}
-snippet stateconf.context
-  stateconf:
-    - context
-snippet stateconf.set
-  stateconf:
-    - set
-snippet cron.absent
-  cron:
-    - absent
-    - name: ${1:root}
-    - user: ${2:None}
-snippet cron.env_absent
-  cron:
-    - env_absent
-    - name: ${1:root}
-snippet cron.env_present
-  cron:
-    - env_present
-    - name: ${1:None}
-    - value: ${2:root}
-snippet cron.file
-  cron:
-    - file
-    - name: ${1:''}
-    - source_hash: ${2:root}
-    - user: ${3:None}
-    - template: ${4:None}
-    - context: ${5:True}
-    - replace: ${6:None}
-    - defaults: ${7:None}
-    - env: ${8:''}
-snippet cron.present
-  cron:
+snippet mysql_user.present
+  mysql_user:
     - present
-    - name: ${1:root}
-    - user: ${2:*}
-    - minute: ${3:*}
-    - hour: ${4:*}
-    - daymonth: ${5:*}
-    - month: ${6:*}
-    - dayweek: ${7:None}
-    - comment: ${8:None}
-snippet xmpp.send_msg
-  xmpp:
-    - send_msg
-snippet rabbitmq_user.absent
-  rabbitmq_user:
-    - absent
-    - name: ${1:None}
-snippet rabbitmq_user.present
-  rabbitmq_user:
-    - present
-    - name: ${1:None}
-    - password: ${2:False}
-    - force: ${3:None}
-    - tags: ${4:()}
-    - perms: ${5:None}
-snippet at.absent
-  at:
-    - absent
-    - name: ${1:None}
-snippet at.present
-  at:
-    - present
-    - name: ${1:None}
-    - timespec: ${2:None}
-    - tag: ${3:None}
-    - runas: ${4:None}
-snippet locale.system
-  locale:
-    - system
-snippet pecl.installed
-  pecl:
-    - installed
-    - name: ${1:None}
-    - version: ${2:False}
-    - defaults: ${3:False}
-    - force: ${4:stable}
-snippet pecl.removed
-  pecl:
-    - removed
+    - host: ${1:None}
+    - password: ${2:None}
+    - password_hash: ${3:False}
+    - allow_passwordless: ${4:False}
 snippet cloud.absent
   cloud:
     - absent
@@ -433,488 +465,116 @@ snippet cloud.present
 snippet cloud.profile
   cloud:
     - profile
-snippet rbenv.absent
-  rbenv:
-    - absent
-    - name: ${1:None}
-    - runas: ${2:None}
-snippet rbenv.installed
-  rbenv:
-    - installed
-    - name: ${1:False}
-    - default: ${2:None}
-    - runas: ${3:None}
-snippet win_firewall.disabled
-  win_firewall:
-    - disabled
-snippet makeconf.absent
-  makeconf:
-    - absent
-snippet makeconf.present
-  makeconf:
-    - present
-    - name: ${1:None}
-    - value: ${2:None}
-    - contains: ${3:None}
-snippet dockerio.absent
-  dockerio:
-    - absent
-snippet dockerio.built
-  dockerio:
-    - built
-    - name: ${1:None}
-    - path: ${2:False}
-    - quiet: ${3:False}
-    - nocache: ${4:True}
-    - rm: ${5:False}
-    - force: ${6:None}
-snippet dockerio.installed
-  dockerio:
-    - installed
-    - name: ${1:None}
-    - image: ${2:None}
-    - command: ${3:None}
-    - hostname: ${4:True}
-    - user: ${5:False}
-    - detach: ${6:False}
-    - stdin_open: ${7:0}
-    - tty: ${8:None}
-    - mem_limit: ${9:None}
-    - ports: ${10:None}
-    - environment: ${11:None}
-    - dns: ${12:None}
-snippet dockerio.mod_watch
-  dockerio:
-    - mod_watch
-    - name: ${1:None}
-snippet dockerio.present
-  dockerio:
-    - present
-snippet dockerio.pulled
-  dockerio:
-    - pulled
-    - name: ${1:False}
-snippet dockerio.run
-  dockerio:
-    - run
-    - name: ${1:None}
-    - cid: ${2:None}
-    - hostname: ${3:False}
-    - stateful: ${4:None}
-    - onlyif: ${5:None}
-    - unless: ${6:None}
-    - docked_onlyif: ${7:None}
-snippet dockerio.running
-  dockerio:
-    - running
-    - name: ${1:None}
-    - container: ${2:None}
-    - port_bindings: ${3:None}
-    - binds: ${4:False}
-    - publish_all_ports: ${5:None}
-    - links: ${6:None}
-    - lxc_conf: ${7:False}
-snippet dockerio.script
-  dockerio:
-    - script
-    - name: ${1:None}
-    - cid: ${2:None}
-    - hostname: ${3:None}
-    - state_id: ${4:False}
-    - stateful: ${5:None}
-    - onlyif: ${6:None}
-    - unless: ${7:None}
-    - docked_onlyif: ${8:None}
-snippet aws_sqs.absent
-  aws_sqs:
-    - absent
-    - name: ${1:None}
-    - region: ${2:False}
-snippet aws_sqs.exists
-  aws_sqs:
-    - exists
-    - name: ${1:None}
-    - region: ${2:False}
-snippet pip_state.installed
-  pip_state:
-    - installed
-    - name: ${1:None}
-    - pip_bin: ${2:None}
-    - requirements: ${3:None}
-    - env: ${4:None}
-    - bin_env: ${5:False}
-    - use_wheel: ${6:None}
-    - log: ${7:None}
-    - proxy: ${8:None}
-    - timeout: ${9:None}
-    - repo: ${10:None}
-    - editable: ${11:None}
-    - find_links: ${12:None}
-    - index_url: ${13:None}
-    - extra_index_url: ${14:False}
-    - no_index: ${15:None}
-    - mirrors: ${16:None}
-    - build: ${17:None}
-    - target: ${18:None}
-    - download: ${19:None}
-    - download_cache: ${20:None}
-    - source: ${21:False}
-    - upgrade: ${22:False}
-    - force_reinstall: ${23:False}
-    - ignore_installed: ${24:None}
-    - exists_action: ${25:False}
-    - no_deps: ${26:False}
-    - no_install: ${27:False}
-    - no_download: ${28:None}
-    - install_options: ${29:None}
-    - global_options: ${30:None}
-    - user: ${31:None}
-    - runas: ${32:False}
-    - no_chown: ${33:None}
-    - cwd: ${34:False}
-    - activate: ${35:False}
-snippet pip_state.removed
-  pip_state:
-    - removed
-    - name: ${1:None}
-    - requirements: ${2:None}
-    - bin_env: ${3:None}
-    - log: ${4:None}
-    - proxy: ${5:None}
-    - timeout: ${6:None}
-    - user: ${7:None}
-    - runas: ${8:None}
-snippet gnomedesktop.desktop_interface
-  gnomedesktop:
-    - desktop_interface
-    - name: ${1:None}
-    - user: ${2:None}
-    - automatic_mnemonics: ${3:None}
-    - buttons_have_icons: ${4:None}
-    - can_change_accels: ${5:None}
-    - clock_format: ${6:None}
-    - clock_show_date: ${7:None}
-    - clock_show_seconds: ${8:None}
-    - cursor_blink: ${9:None}
-    - cursor_blink_time: ${10:None}
-    - cursor_blink_timeout: ${11:None}
-    - cursor_size: ${12:None}
-    - cursor_theme: ${13:None}
-    - document_font_name: ${14:None}
-    - enable_animations: ${15:None}
-    - font_name: ${16:None}
-    - gtk_color_palette: ${17:None}
-    - gtk_color_scheme: ${18:None}
-    - gtk_im_module: ${19:None}
-    - gtk_im_preedit_style: ${20:None}
-    - gtk_im_status_style: ${21:None}
-    - gtk_key_theme: ${22:None}
-    - gtk_theme: ${23:None}
-    - gtk_timeout_initial: ${24:None}
-    - gtk_timeout_repeat: ${25:None}
-    - icon_theme: ${26:None}
-    - menubar_accel: ${27:None}
-    - menubar_detachable: ${28:None}
-    - menus_have_icons: ${29:None}
-    - menus_have_tearoff: ${30:None}
-    - monospace_font_name: ${31:None}
-    - show_input_method_menu: ${32:None}
-    - show_unicode_menu: ${33:None}
-    - text_scaling_factor: ${34:None}
-    - toolbar_detachable: ${35:None}
-    - toolbar_icons_size: ${36:None}
-    - toolbar_style: ${37:None}
-snippet gnomedesktop.desktop_lockdown
-  gnomedesktop:
-    - desktop_lockdown
-    - name: ${1:None}
-    - user: ${2:None}
-    - disable_application_handlers: ${3:None}
-    - disable_command_line: ${4:None}
-    - disable_lock_screen: ${5:None}
-    - disable_log_out: ${6:None}
-    - disable_print_setup: ${7:None}
-    - disable_printing: ${8:None}
-    - disable_save_to_disk: ${9:None}
-    - disable_user_switching: ${10:None}
-snippet gnomedesktop.wm_preferences
-  gnomedesktop:
-    - wm_preferences
-    - name: ${1:None}
-    - user: ${2:None}
-    - action_double_click_titlebar: ${3:None}
-    - action_middle_click_titlebar: ${4:None}
-    - action_right_click_titlebar: ${5:None}
-    - application_based: ${6:None}
-    - audible_bell: ${7:None}
-    - auto_raise: ${8:None}
-    - auto_raise_delay: ${9:None}
-    - button_layout: ${10:None}
-    - disable_workarounds: ${11:None}
-    - focus_mode: ${12:None}
-    - focus_new_windows: ${13:None}
-    - mouse_button_modifier: ${14:None}
-    - num_workspaces: ${15:None}
-    - raise_on_click: ${16:None}
-    - resize_with_right_button: ${17:None}
-    - theme: ${18:None}
-    - titlebar_font: ${19:None}
-    - titlebar_uses_system_font: ${20:None}
-    - visual_bell: ${21:None}
-    - visual_bell_type: ${22:None}
-snippet mysql_grants.absent
-  mysql_grants:
-    - absent
-    - name: ${1:None}
-    - grant: ${2:None}
-    - database: ${3:None}
-    - user: ${4:localhost}
-    - host: ${5:False}
-    - grant_option: ${6:True}
-snippet mysql_grants.present
-  mysql_grants:
-    - present
-    - name: ${1:None}
-    - grant: ${2:None}
-    - database: ${3:None}
-    - user: ${4:localhost}
-    - host: ${5:False}
-    - grant_option: ${6:True}
-    - escape: ${7:False}
-snippet openstack_config.absent
-  openstack_config:
-    - absent
-    - name: ${1:None}
-snippet openstack_config.present
-  openstack_config:
-    - present
-    - name: ${1:None}
-snippet file.absent
-  file:
-    - absent
-snippet file.accumulated
-  file:
-    - accumulated
-snippet file.append
-  file:
-    - append
-    - name: ${1:None}
-    - text: ${2:False}
-    - makedirs: ${3:None}
-    - source: ${4:None}
-    - source_hash: ${5:jinja}
-    - template: ${6:None}
-    - sources: ${7:None}
-    - source_hashes: ${8:None}
-    - defaults: ${9:None}
-snippet file.blockreplace
-  file:
-    - blockreplace
-    - name: ${1:#-- start managed zone --}
-    - marker_start: ${2:#-- end managed zone --}
-    - marker_end: ${3:''}
-    - content: ${4:False}
-    - append_if_not_found: ${5:False}
-    - prepend_if_not_found: ${6:.bak}
-    - backup: ${7:True}
-snippet file.comment
-  file:
-    - comment
-    - name: ${1:#}
-    - regex: ${2:.bak}
-snippet file.copy
-  file:
-    - copy
-    - name: ${1:False}
-    - source: ${2:False}
-snippet file.directory
-  file:
-    - directory
-    - name: ${1:None}
-    - user: ${2:None}
-    - group: ${3:None}
-    - recurse: ${4:None}
-    - dir_mode: ${5:None}
-    - file_mode: ${6:False}
-    - makedirs: ${7:False}
-    - clean: ${8:None}
-    - require: ${9:None}
-    - exclude_pat: ${10:False}
-snippet file.exists
-  file:
-    - exists
-snippet file.managed
-  file:
-    - managed
-    - name: ${1:None}
-    - source: ${2:''}
-    - source_hash: ${3:None}
-    - user: ${4:None}
-    - group: ${5:None}
-    - mode: ${6:None}
-    - template: ${7:False}
-    - makedirs: ${8:None}
-    - dir_mode: ${9:None}
-    - context: ${10:True}
-    - replace: ${11:None}
-    - defaults: ${12:None}
-    - env: ${13:''}
-    - backup: ${14:True}
-    - show_diff: ${15:True}
-    - create: ${16:None}
-    - contents: ${17:None}
-snippet file.missing
-  file:
-    - missing
-snippet file.mknod
-  file:
-    - mknod
-    - name: ${1:0}
-    - ntype: ${2:0}
-    - major: ${3:None}
-    - minor: ${4:None}
-    - user: ${5:0600}
-snippet file.patch
-  file:
-    - patch
-    - name: ${1:None}
-    - source: ${2:None}
-    - hash: ${3:''}
-    - options: ${4:True}
-    - dry_run_first: ${5:None}
-snippet file.recurse
-  file:
-    - recurse
-    - name: ${1:False}
-    - source: ${2:None}
-    - clean: ${3:None}
-    - require: ${4:None}
-    - user: ${5:None}
-    - group: ${6:None}
-    - dir_mode: ${7:None}
-    - file_mode: ${8:None}
-    - sym_mode: ${9:None}
-    - template: ${10:None}
-    - context: ${11:None}
-    - defaults: ${12:False}
-    - env: ${13:''}
-    - include_empty: ${14:None}
-    - backup: ${15:None}
-    - include_pat: ${16:None}
-    - exclude_pat: ${17:False}
-    - maxdepth: ${18:False}
-snippet file.rename
-  file:
-    - rename
-    - name: ${1:False}
-    - source: ${2:False}
-snippet file.replace
-  file:
-    - replace
-    - name: ${1:0}
-    - pattern: ${2:0}
-    - repl: ${3:1}
-    - count: ${4:.bak}
-    - flags: ${5:True}
-snippet file.sed
-  file:
-    - sed
-    - name: ${1:''}
-    - before: ${2:.bak}
-    - after: ${3:-r -e}
-    - limit: ${4:g}
-    - backup: ${5:False}
-snippet file.serialize
-  file:
-    - serialize
-    - name: ${1:None}
-    - dataset: ${2:None}
-    - user: ${3:None}
-    - group: ${4:None}
-    - mode: ${5:''}
-    - env: ${6:False}
-    - backup: ${7:True}
-    - makedirs: ${8:True}
-snippet file.symlink
-  file:
-    - symlink
-    - name: ${1:False}
-    - target: ${2:None}
-    - force: ${3:False}
-    - backupname: ${4:None}
-    - makedirs: ${5:None}
-    - user: ${6:None}
-snippet file.touch
-  file:
-    - touch
-    - name: ${1:None}
-    - atime: ${2:None}
-    - mtime: ${3:False}
-snippet file.uncomment
-  file:
-    - uncomment
-    - name: ${1:#}
-    - regex: ${2:.bak}
 snippet mount.mounted
   mount:
     - mounted
-    - name: ${1:False}
-    - device: ${2:None}
-    - fstype: ${3:0}
-    - mkmnt: ${4:0}
-    - opts: ${5:/etc/fstab}
-    - dump: ${6:True}
+    - device: ${1:None}
+    - fstype: ${2:0}
+    - mkmnt: ${3:0}
+    - opts: ${4:/etc/fstab}
+    - dump: ${5:True}
 snippet mount.swap
   mount:
     - swap
-    - name: ${1:True}
-    - persist: ${2:/etc/fstab}
+    - persist: ${1:/etc/fstab}
 snippet mount.unmounted
   mount:
     - unmounted
-    - name: ${1:/etc/fstab}
-    - config: ${2:False}
-snippet postgres_user.absent
-  postgres_user:
-    - absent
-    - name: ${1:None}
-    - runas: ${2:None}
-    - user: ${3:None}
-    - maintenance_db: ${4:None}
-    - db_password: ${5:None}
-    - db_host: ${6:None}
-    - db_port: ${7:None}
-snippet postgres_user.present
-  postgres_user:
-    - present
-    - name: ${1:None}
-    - createdb: ${2:None}
-    - createroles: ${3:None}
-    - createuser: ${4:None}
-    - encrypted: ${5:None}
-    - superuser: ${6:None}
-    - replication: ${7:None}
-    - inherit: ${8:None}
-    - login: ${9:None}
-    - password: ${10:None}
-    - groups: ${11:None}
-    - runas: ${12:None}
-    - user: ${13:None}
-    - maintenance_db: ${14:None}
-    - db_password: ${15:None}
-    - db_host: ${16:None}
-    - db_port: ${17:None}
+    - config: ${1:False}
+snippet cmd.call
+  cmd:
+    - call
+    - func: ${1:None}
+    - args: ${2:None}
+    - kws: ${3:None}
+snippet cmd.mod_watch
+  cmd:
+    - mod_watch
+snippet cmd.run
+  cmd:
+    - run
+    - onlyif: ${1:None}
+    - unless: ${2:None}
+    - cwd: ${3:None}
+    - user: ${4:None}
+    - group: ${5:None}
+    - shell: ${6:None}
+    - env: ${7:False}
+    - stateful: ${8:None}
+    - umask: ${9:info}
+    - output_loglevel: ${10:False}
+    - quiet: ${11:None}
+snippet cmd.script
+  cmd:
+    - script
+    - source: ${1:None}
+    - template: ${2:None}
+    - onlyif: ${3:None}
+    - unless: ${4:None}
+    - cwd: ${5:None}
+    - user: ${6:None}
+    - group: ${7:None}
+    - shell: ${8:None}
+    - env: ${9:False}
+    - stateful: ${10:None}
+    - umask: ${11:None}
+snippet cmd.wait
+  cmd:
+    - wait
+    - onlyif: ${1:None}
+    - unless: ${2:None}
+    - cwd: ${3:None}
+    - user: ${4:None}
+    - group: ${5:None}
+    - shell: ${6:()}
+    - env: ${7:False}
+    - stateful: ${8:None}
+snippet cmd.wait_call
+  cmd:
+    - wait_call
+    - func: ${1:None}
+    - args: ${2:None}
+    - kws: ${3:None}
+    - onlyif: ${4:False}
+snippet cmd.wait_script
+  cmd:
+    - wait_script
+    - source: ${1:None}
+    - template: ${2:None}
+    - onlyif: ${3:None}
+    - unless: ${4:None}
+    - cwd: ${5:None}
+    - user: ${6:None}
+    - group: ${7:None}
+    - shell: ${8:None}
+    - env: ${9:False}
+    - stateful: ${10:None}
+snippet cmd.watch
+  cmd:
+    - watch
+    - onlyif: ${1:None}
+    - unless: ${2:None}
+    - cwd: ${3:None}
+    - user: ${4:None}
+    - group: ${5:None}
+    - shell: ${6:()}
+    - env: ${7:False}
+    - stateful: ${8:None}
+snippet stateconf.context
+  stateconf:
+    - context
+snippet stateconf.set
+  stateconf:
+    - set
 snippet lvm.lv_absent
   lvm:
     - lv_absent
-    - name: ${1:None}
 snippet lvm.lv_present
   lvm:
     - lv_present
-    - name: ${1:None}
-    - vgname: ${2:None}
-    - size: ${3:None}
-    - extents: ${4:''}
+    - vgname: ${1:None}
+    - size: ${2:None}
+    - extents: ${3:''}
 snippet lvm.pv_present
   lvm:
     - pv_present
@@ -924,414 +584,226 @@ snippet lvm.vg_absent
 snippet lvm.vg_present
   lvm:
     - vg_present
-    - name: ${1:None}
-snippet zcbuildout.installed
-  zcbuildout:
-    - installed
-    - name: ${1:buildout.cfg}
-    - config: ${2:False}
-    - quiet: ${3:None}
-    - parts: ${4:None}
-    - runas: ${5:None}
-    - user: ${6:()}
-    - env: ${7:None}
-    - buildout_ver: ${8:False}
-    - test_release: ${9:None}
-    - distribute: ${10:None}
-    - new_st: ${11:False}
-    - offline: ${12:False}
-    - newest: ${13:/usr/bin/python}
-    - python: ${14:False}
-    - debug: ${15:False}
-    - verbose: ${16:None}
-    - unless: ${17:None}
-snippet postgres_group.absent
-  postgres_group:
+snippet portage_config.flags
+  portage_config:
+    - flags
+    - use: ${1:None}
+    - accept_keywords: ${2:None}
+    - env: ${3:None}
+    - license: ${4:None}
+    - properties: ${5:False}
+    - unmask: ${6:False}
+snippet portage_config.mod_init
+  portage_config:
+    - mod_init
+snippet disk.status
+  disk:
+    - status
+    - maximum: ${1:None}
+snippet postgres_database.absent
+  postgres_database:
     - absent
-    - name: ${1:None}
-    - runas: ${2:None}
-    - user: ${3:None}
-    - maintenance_db: ${4:None}
-    - db_password: ${5:None}
-    - db_host: ${6:None}
-    - db_port: ${7:None}
-snippet postgres_group.present
-  postgres_group:
+    - runas: ${1:None}
+    - user: ${2:None}
+    - maintenance_db: ${3:None}
+    - db_password: ${4:None}
+    - db_host: ${5:None}
+    - db_port: ${6:None}
+snippet postgres_database.present
+  postgres_database:
     - present
-    - name: ${1:None}
-    - createdb: ${2:None}
-    - createroles: ${3:None}
-    - createuser: ${4:None}
-    - encrypted: ${5:None}
-    - superuser: ${6:None}
-    - inherit: ${7:None}
-    - login: ${8:None}
-    - replication: ${9:None}
-    - password: ${10:None}
-    - groups: ${11:None}
-    - runas: ${12:None}
-    - user: ${13:None}
-    - maintenance_db: ${14:None}
-    - db_password: ${15:None}
-    - db_host: ${16:None}
-    - db_port: ${17:None}
+    - tablespace: ${1:None}
+    - encoding: ${2:None}
+    - lc_collate: ${3:None}
+    - lc_ctype: ${4:None}
+    - owner: ${5:None}
+    - template: ${6:None}
+    - runas: ${7:None}
+    - user: ${8:None}
+    - maintenance_db: ${9:None}
+    - db_password: ${10:None}
+    - db_host: ${11:None}
+    - db_port: ${12:None}
 snippet win_path.absent
   win_path:
     - absent
 snippet win_path.exists
   win_path:
     - exists
-    - name: ${1:None}
-snippet supervisord.dead
-  supervisord:
-    - dead
-    - name: ${1:None}
-    - user: ${2:None}
-    - runas: ${3:None}
-    - conf_file: ${4:None}
-snippet supervisord.mod_watch
-  supervisord:
-    - mod_watch
-    - name: ${1:True}
-    - restart: ${2:False}
-    - update: ${3:None}
-    - user: ${4:None}
-    - runas: ${5:None}
-    - conf_file: ${6:None}
-snippet supervisord.running
-  supervisord:
-    - running
-    - name: ${1:False}
-    - restart: ${2:False}
-    - update: ${3:None}
-    - user: ${4:None}
-    - runas: ${5:None}
-    - conf_file: ${6:None}
-snippet keyboard.system
-  keyboard:
-    - system
-snippet keyboard.xorg
-  keyboard:
-    - xorg
-snippet apt.held
-  apt:
-    - held
+snippet ssh_known_hosts.absent
+  ssh_known_hosts:
+    - absent
+snippet ssh_known_hosts.present
+  ssh_known_hosts:
+    - present
+    - user: ${1:None}
+    - fingerprint: ${2:None}
+    - port: ${3:.ssh/known_hosts}
+    - enc: ${4:True}
 snippet libvirt.keys
   libvirt:
     - keys
-    - name: ${1:/etc/pki}
-snippet ssh_auth.absent
-  ssh_auth:
-    - absent
-    - name: ${1:ssh-rsa}
-    - user: ${2:''}
-    - enc: ${3:None}
-    - comment: ${4:.ssh/authorized_keys}
-snippet ssh_auth.present
-  ssh_auth:
-    - present
-    - name: ${1:ssh-rsa}
-    - user: ${2:''}
-    - enc: ${3:''}
-    - comment: ${4:None}
-    - source: ${5:.ssh/authorized_keys}
-snippet rdp.disabled
-  rdp:
-    - disabled
-snippet rdp.enabled
-  rdp:
-    - enabled
-snippet virtualenv_mod.manage
-  virtualenv_mod:
-    - manage
-    - name: ${1:None}
-    - venv_bin: ${2:None}
-    - requirements: ${3:None}
-    - no_site_packages: ${4:False}
-    - system_site_packages: ${5:False}
-    - distribute: ${6:False}
-    - use_wheel: ${7:False}
-    - clear: ${8:None}
-    - python: ${9:None}
-    - extra_search_dir: ${10:None}
-    - never_download: ${11:None}
-    - prompt: ${12:None}
-    - user: ${13:None}
-    - runas: ${14:False}
-    - no_chown: ${15:None}
-    - cwd: ${16:None}
-    - index_url: ${17:None}
-    - extra_index_url: ${18:False}
-    - pre_releases: ${19:False}
-    - no_deps: ${20:None}
-snippet virtualenv_mod.managed
-  virtualenv_mod:
-    - managed
-    - name: ${1:None}
-    - venv_bin: ${2:None}
-    - requirements: ${3:None}
-    - no_site_packages: ${4:False}
-    - system_site_packages: ${5:False}
-    - distribute: ${6:False}
-    - use_wheel: ${7:False}
-    - clear: ${8:None}
-    - python: ${9:None}
-    - extra_search_dir: ${10:None}
-    - never_download: ${11:None}
-    - prompt: ${12:None}
-    - user: ${13:None}
-    - runas: ${14:False}
-    - no_chown: ${15:None}
-    - cwd: ${16:None}
-    - index_url: ${17:None}
-    - extra_index_url: ${18:False}
-    - pre_releases: ${19:False}
-    - no_deps: ${20:None}
-snippet rabbitmq_vhost.absent
-  rabbitmq_vhost:
-    - absent
-    - name: ${1:None}
-snippet rabbitmq_vhost.present
-  rabbitmq_vhost:
-    - present
-    - name: ${1:None}
-    - user: ${2:None}
-    - owner: ${3:None}
-    - conf: ${4:None}
-    - write: ${5:None}
-    - read: ${6:None}
-snippet npm.bootstrap
-  npm:
-    - bootstrap
-    - name: ${1:None}
-    - runas: ${2:None}
-snippet npm.installed
-  npm:
-    - installed
-    - name: ${1:None}
-    - dir: ${2:None}
-    - runas: ${3:None}
-    - user: ${4:False}
-snippet npm.removed
-  npm:
-    - removed
-    - name: ${1:None}
-    - dir: ${2:None}
-    - runas: ${3:None}
-snippet pkgrepo.absent
-  pkgrepo:
-    - absent
-snippet pkgrepo.managed
-  pkgrepo:
-    - managed
-snippet alias.absent
-  alias:
-    - absent
-snippet alias.present
-  alias:
-    - present
-snippet keystone.role_absent
-  keystone:
-    - role_absent
-    - name: ${1:None}
-snippet keystone.role_present
-  keystone:
-    - role_present
-    - name: ${1:None}
-snippet keystone.service_absent
-  keystone:
-    - service_absent
-    - name: ${1:None}
-snippet keystone.service_present
-  keystone:
-    - service_present
-    - name: ${1:None}
-    - service_type: ${2:None}
-snippet keystone.tenant_absent
-  keystone:
-    - tenant_absent
-    - name: ${1:None}
-snippet keystone.tenant_present
-  keystone:
-    - tenant_present
-    - name: ${1:None}
-    - description: ${2:True}
-    - enabled: ${3:None}
-snippet keystone.user_absent
-  keystone:
-    - user_absent
-    - name: ${1:None}
-snippet keystone.user_present
-  keystone:
-    - user_present
-    - name: ${1:None}
-    - password: ${2:True}
-    - email: ${3:None}
-    - tenant: ${4:None}
-snippet modjk_worker.activate
-  modjk_worker:
-    - activate
-    - name: ${1:default}
-    - lbn: ${2:glob}
-snippet modjk_worker.disable
-  modjk_worker:
-    - disable
-    - name: ${1:default}
-    - lbn: ${2:glob}
-snippet modjk_worker.stop
-  modjk_worker:
-    - stop
-    - name: ${1:default}
-    - lbn: ${2:glob}
-snippet ddns.absent
-  ddns:
-    - absent
-    - name: ${1:None}
-    - zone: ${2:None}
-snippet ddns.present
-  ddns:
-    - present
-    - name: ${1:A}
 snippet pkgng.update_packaging_site
   pkgng:
     - update_packaging_site
-snippet rvm.gemset_present
-  rvm:
-    - gemset_present
-    - name: ${1:default}
-    - ruby: ${2:None}
-    - runas: ${3:None}
-snippet rvm.installed
-  rvm:
-    - installed
-    - name: ${1:False}
-    - default: ${2:None}
-    - runas: ${3:None}
-snippet svn.dirty
-  svn:
-    - dirty
-    - name: ${1:None}
-    - target: ${2:None}
-    - user: ${3:None}
-    - username: ${4:False}
-snippet svn.export
-  svn:
-    - export
-    - name: ${1:None}
-    - target: ${2:None}
-    - rev: ${3:None}
-    - user: ${4:None}
-    - username: ${5:None}
-    - password: ${6:False}
-    - force: ${7:True}
-    - externals: ${8:False}
-snippet svn.latest
-  svn:
-    - latest
-    - name: ${1:None}
-    - target: ${2:None}
-    - rev: ${3:None}
-    - user: ${4:None}
-    - username: ${5:None}
-    - password: ${6:False}
-    - force: ${7:True}
-    - externals: ${8:False}
-snippet disk.status
-  disk:
-    - status
-    - name: ${1:None}
-    - maximum: ${2:None}
-snippet sysctl.present
-  sysctl:
+snippet reg.present
+  reg:
     - present
-    - name: ${1:None}
-snippet mongodb_database.absent
-  mongodb_database:
+snippet file.absent
+  file:
     - absent
-    - name: ${1:None}
-    - user: ${2:None}
-    - password: ${3:None}
-    - host: ${4:None}
-snippet mysql_database.absent
-  mysql_database:
-    - absent
-snippet mysql_database.present
-  mysql_database:
-    - present
-snippet git.latest
-  git:
-    - latest
-    - name: ${1:None}
-    - rev: ${2:None}
-    - target: ${3:None}
-    - runas: ${4:None}
-    - user: ${5:None}
-    - force: ${6:False}
-    - force_checkout: ${7:False}
-    - submodules: ${8:False}
-    - mirror: ${9:False}
-    - bare: ${10:origin}
-    - remote_name: ${11:False}
-    - always_fetch: ${12:None}
-    - identity: ${13:False}
-    - onlyif: ${14:False}
-snippet git.present
-  git:
-    - present
-    - name: ${1:True}
-    - bare: ${2:None}
-    - runas: ${3:None}
-    - user: ${4:False}
-snippet win_servermanager.installed
-  win_servermanager:
-    - installed
-    - name: ${1:False}
-    - recurse: ${2:False}
-snippet host.absent
-  host:
-    - absent
-snippet host.present
-  host:
-    - present
-snippet alternatives.auto
-  alternatives:
-    - auto
-snippet alternatives.install
-  alternatives:
-    - install
-snippet alternatives.remove
-  alternatives:
-    - remove
-snippet alternatives.set_
-  alternatives:
-    - set_
-snippet kmod.absent
-  kmod:
-    - absent
-    - name: ${1:False}
-    - persist: ${2:True}
-snippet kmod.present
-  kmod:
-    - present
-    - name: ${1:False}
-snippet win_network.managed
-  win_network:
+snippet file.accumulated
+  file:
+    - accumulated
+snippet file.append
+  file:
+    - append
+    - text: ${1:False}
+    - makedirs: ${2:None}
+    - source: ${3:None}
+    - source_hash: ${4:jinja}
+    - template: ${5:None}
+    - sources: ${6:None}
+    - source_hashes: ${7:None}
+    - defaults: ${8:None}
+snippet file.blockreplace
+  file:
+    - blockreplace
+    - marker_start: ${1:#-- end managed zone --}
+    - marker_end: ${2:''}
+    - content: ${3:False}
+    - append_if_not_found: ${4:False}
+    - prepend_if_not_found: ${5:.bak}
+    - backup: ${6:True}
+snippet file.comment
+  file:
+    - comment
+    - regex: ${1:.bak}
+snippet file.copy
+  file:
+    - copy
+    - source: ${1:False}
+snippet file.directory
+  file:
+    - directory
+    - user: ${1:None}
+    - group: ${2:None}
+    - recurse: ${3:None}
+    - dir_mode: ${4:None}
+    - file_mode: ${5:False}
+    - makedirs: ${6:False}
+    - clean: ${7:None}
+    - require: ${8:None}
+    - exclude_pat: ${9:False}
+snippet file.exists
+  file:
+    - exists
+snippet file.managed
+  file:
     - managed
-    - name: ${1:None}
-    - dns_proto: ${2:None}
-    - dns_servers: ${3:None}
-    - ip_proto: ${4:None}
-    - ip_addrs: ${5:None}
-    - gateway: ${6:True}
-snippet win_dns_client.dns_dhcp
-  win_dns_client:
-    - dns_dhcp
-    - name: ${1:Local Area Connection}
-snippet win_dns_client.dns_exists
-  win_dns_client:
-    - dns_exists
-    - name: ${1:None}
-    - servers: ${2:Local Area Connection}
+    - source: ${1:''}
+    - source_hash: ${2:None}
+    - user: ${3:None}
+    - group: ${4:None}
+    - mode: ${5:None}
+    - template: ${6:False}
+    - makedirs: ${7:None}
+    - dir_mode: ${8:None}
+    - context: ${9:True}
+    - replace: ${10:None}
+    - defaults: ${11:None}
+    - env: ${12:''}
+    - backup: ${13:True}
+    - show_diff: ${14:True}
+    - create: ${15:None}
+    - contents: ${16:None}
+snippet file.missing
+  file:
+    - missing
+snippet file.mknod
+  file:
+    - mknod
+    - ntype: ${1:0}
+    - major: ${2:None}
+    - minor: ${3:None}
+    - user: ${4:0600}
+snippet file.patch
+  file:
+    - patch
+    - source: ${1:None}
+    - hash: ${2:''}
+    - options: ${3:True}
+    - dry_run_first: ${4:None}
+snippet file.recurse
+  file:
+    - recurse
+    - source: ${1:None}
+    - clean: ${2:None}
+    - require: ${3:None}
+    - user: ${4:None}
+    - group: ${5:None}
+    - dir_mode: ${6:None}
+    - file_mode: ${7:None}
+    - sym_mode: ${8:None}
+    - template: ${9:None}
+    - context: ${10:None}
+    - defaults: ${11:False}
+    - env: ${12:''}
+    - include_empty: ${13:None}
+    - backup: ${14:None}
+    - include_pat: ${15:None}
+    - exclude_pat: ${16:False}
+    - maxdepth: ${17:False}
+snippet file.rename
+  file:
+    - rename
+    - source: ${1:False}
+snippet file.replace
+  file:
+    - replace
+    - pattern: ${1:0}
+    - repl: ${2:1}
+    - count: ${3:.bak}
+    - flags: ${4:True}
+snippet file.sed
+  file:
+    - sed
+    - before: ${1:.bak}
+    - after: ${2:-r -e}
+    - limit: ${3:g}
+    - backup: ${4:False}
+snippet file.serialize
+  file:
+    - serialize
+    - dataset: ${1:None}
+    - user: ${2:None}
+    - group: ${3:None}
+    - mode: ${4:''}
+    - env: ${5:False}
+    - backup: ${6:True}
+    - makedirs: ${7:True}
+snippet file.symlink
+  file:
+    - symlink
+    - target: ${1:None}
+    - force: ${2:False}
+    - backupname: ${3:None}
+    - makedirs: ${4:None}
+    - user: ${5:None}
+snippet file.touch
+  file:
+    - touch
+    - atime: ${1:None}
+    - mtime: ${2:False}
+snippet file.uncomment
+  file:
+    - uncomment
+    - regex: ${1:.bak}
+snippet archive.extracted
+  archive:
+    - extracted
+    - source: ${1:None}
+    - archive_format: ${2:None}
 snippet win_system.computer_desc
   win_system:
     - computer_desc
@@ -1341,74 +813,69 @@ snippet win_system.computer_description
 snippet win_system.computer_name
   win_system:
     - computer_name
-snippet status.loadavg
-  status:
-    - loadavg
-    - name: ${1:None}
-    - maximum: ${2:None}
-snippet tomcat.mod_watch
-  tomcat:
-    - mod_watch
-    - name: ${1:http://localhost:8080/manager}
-    - url: ${2:180}
-snippet tomcat.wait
-  tomcat:
-    - wait
-    - name: ${1:http://localhost:8080/manager}
-    - url: ${2:180}
-snippet tomcat.war_deployed
-  tomcat:
-    - war_deployed
-    - name: ${1:http://localhost:8080/manager}
-    - war: ${2:180}
-snippet ports.installed
-  ports:
-    - installed
-    - name: ${1:None}
-snippet eselect.set_
-  eselect:
-    - set_
-snippet user.absent
-  user:
+snippet quota.mode
+  quota:
+    - mode
+snippet pkgrepo.absent
+  pkgrepo:
     - absent
-    - name: ${1:False}
-    - purge: ${2:False}
-snippet user.present
-  user:
+snippet pkgrepo.managed
+  pkgrepo:
+    - managed
+snippet layman.absent
+  layman:
+    - absent
+snippet layman.present
+  layman:
     - present
-    - name: ${1:None}
-    - uid: ${2:None}
-    - gid: ${3:False}
-    - gid_from_name: ${4:None}
-    - groups: ${5:None}
-    - optional_groups: ${6:True}
-    - remove_groups: ${7:None}
-    - home: ${8:True}
-    - createhome: ${9:None}
-    - password: ${10:True}
-    - enforce_password: ${11:None}
-    - shell: ${12:True}
-    - unique: ${13:False}
-    - system: ${14:None}
-    - fullname: ${15:None}
-    - roomnumber: ${16:None}
-    - workphone: ${17:None}
-snippet mongodb_user.absent
-  mongodb_user:
+snippet rdp.disabled
+  rdp:
+    - disabled
+snippet rdp.enabled
+  rdp:
+    - enabled
+snippet grains.list_absent
+  grains:
+    - list_absent
+snippet grains.list_present
+  grains:
+    - list_present
+snippet grains.present
+  grains:
+    - present
+snippet kmod.absent
+  kmod:
     - absent
-    - name: ${1:None}
+    - persist: ${1:True}
+snippet kmod.present
+  kmod:
+    - present
+snippet svn.dirty
+  svn:
+    - dirty
+    - target: ${1:None}
     - user: ${2:None}
-    - password: ${3:None}
-    - host: ${4:None}
-    - port: ${5:admin}
-snippet mongodb_user.present
-  mongodb_user:
-    - present
-    - name: ${1:admin}
-    - passwd: ${2:None}
-    - database: ${3:None}
-    - user: ${4:None}
-    - password: ${5:None}
+    - username: ${3:False}
+snippet svn.export
+  svn:
+    - export
+    - target: ${1:None}
+    - rev: ${2:None}
+    - user: ${3:None}
+    - username: ${4:None}
+    - password: ${5:False}
+    - force: ${6:True}
+    - externals: ${7:False}
+snippet svn.latest
+  svn:
+    - latest
+    - target: ${1:None}
+    - rev: ${2:None}
+    - user: ${3:None}
+    - username: ${4:None}
+    - password: ${5:False}
+    - force: ${6:True}
+    - externals: ${7:False}
 snippet module.mod_watch
   module:
     - mod_watch
@@ -1424,106 +891,473 @@ snippet module.watch
 snippet augeas.setvalue
   augeas:
     - setvalue
-    - name: ${1:None}
-    - prefix: ${2:None}
-snippet powerpath.license_absent
-  powerpath:
-    - license_absent
-snippet powerpath.license_present
-  powerpath:
-    - license_present
-snippet reg.present
-  reg:
-    - present
-    - name: ${1:REG_DWORD}
-snippet quota.mode
-  quota:
-    - mode
-snippet grains.list_absent
-  grains:
-    - list_absent
-snippet grains.list_present
-  grains:
-    - list_present
-snippet grains.present
-  grains:
-    - present
-snippet pagerduty.create_event
-  pagerduty:
-    - create_event
-snippet postgres_database.absent
-  postgres_database:
-    - absent
-    - name: ${1:None}
+    - prefix: ${1:None}
+snippet supervisord.dead
+  supervisord:
+    - dead
+    - user: ${1:None}
     - runas: ${2:None}
+    - conf_file: ${3:None}
+snippet supervisord.mod_watch
+  supervisord:
+    - mod_watch
+    - restart: ${1:False}
+    - update: ${2:None}
     - user: ${3:None}
-    - maintenance_db: ${4:None}
-    - db_password: ${5:None}
-    - db_host: ${6:None}
-    - db_port: ${7:None}
-snippet postgres_database.present
-  postgres_database:
-    - present
-    - name: ${1:None}
-    - tablespace: ${2:None}
-    - encoding: ${3:None}
-    - lc_collate: ${4:None}
-    - lc_ctype: ${5:None}
-    - owner: ${6:None}
-    - template: ${7:None}
-    - runas: ${8:None}
-    - user: ${9:None}
-    - maintenance_db: ${10:None}
-    - db_password: ${11:None}
-    - db_host: ${12:None}
-    - db_port: ${13:None}
-snippet portage_config.flags
-  portage_config:
-    - flags
-    - name: ${1:None}
-    - use: ${2:None}
-    - accept_keywords: ${3:None}
-    - env: ${4:None}
-    - license: ${5:None}
-    - properties: ${6:False}
-    - unmask: ${7:False}
-snippet portage_config.mod_init
-  portage_config:
-    - mod_init
-snippet saltmod.function
-  saltmod:
-    - function
-    - name: ${1:False}
-    - tgt: ${2:None}
-    - ssh: ${3:''}
-    - tgt_type: ${4:()}
-snippet saltmod.state
-  saltmod:
-    - state
-    - name: ${1:False}
-    - tgt: ${2:None}
-    - ssh: ${3:''}
-    - tgt_type: ${4:None}
-    - ret: ${5:None}
-    - highstate: ${6:None}
-    - sls: ${7:False}
-    - env: ${8:''}
-    - test: ${9:0}
-snippet ssh_known_hosts.absent
-  ssh_known_hosts:
+    - runas: ${4:None}
+    - conf_file: ${5:None}
+snippet supervisord.running
+  supervisord:
+    - running
+    - restart: ${1:False}
+    - update: ${2:None}
+    - user: ${3:None}
+    - runas: ${4:None}
+    - conf_file: ${5:None}
+snippet mysql_grants.absent
+  mysql_grants:
     - absent
-    - name: ${1:.ssh/known_hosts}
-snippet ssh_known_hosts.present
-  ssh_known_hosts:
+    - grant: ${1:None}
+    - database: ${2:None}
+    - user: ${3:localhost}
+    - host: ${4:False}
+    - grant_option: ${5:True}
+snippet mysql_grants.present
+  mysql_grants:
     - present
-    - name: ${1:None}
+    - grant: ${1:None}
+    - database: ${2:None}
+    - user: ${3:localhost}
+    - host: ${4:False}
+    - grant_option: ${5:True}
+    - escape: ${6:False}
+snippet git.latest
+  git:
+    - latest
+    - rev: ${1:None}
+    - target: ${2:None}
+    - runas: ${3:None}
+    - user: ${4:None}
+    - force: ${5:False}
+    - force_checkout: ${6:False}
+    - submodules: ${7:False}
+    - mirror: ${8:False}
+    - bare: ${9:origin}
+    - remote_name: ${10:False}
+    - always_fetch: ${11:None}
+    - identity: ${12:False}
+    - onlyif: ${13:False}
+snippet git.present
+  git:
+    - present
+    - bare: ${1:None}
+    - runas: ${2:None}
+    - user: ${3:False}
+snippet pecl.installed
+  pecl:
+    - installed
+    - version: ${1:False}
+    - defaults: ${2:False}
+    - force: ${3:stable}
+snippet pecl.removed
+  pecl:
+    - removed
+snippet win_servermanager.installed
+  win_servermanager:
+    - installed
+    - recurse: ${1:False}
+snippet rabbitmq_user.absent
+  rabbitmq_user:
+    - absent
+snippet rabbitmq_user.present
+  rabbitmq_user:
+    - present
+    - password: ${1:False}
+    - force: ${2:None}
+    - tags: ${3:()}
+    - perms: ${4:None}
+snippet modjk_worker.activate
+  modjk_worker:
+    - activate
+    - lbn: ${1:glob}
+snippet modjk_worker.disable
+  modjk_worker:
+    - disable
+    - lbn: ${1:glob}
+snippet modjk_worker.stop
+  modjk_worker:
+    - stop
+    - lbn: ${1:glob}
+snippet process.absent
+  process:
+    - absent
+snippet sysctl.present
+  sysctl:
+    - present
+snippet cron.absent
+  cron:
+    - absent
+    - user: ${1:None}
+snippet cron.env_absent
+  cron:
+    - env_absent
+snippet cron.env_present
+  cron:
+    - env_present
+    - value: ${1:root}
+snippet cron.file
+  cron:
+    - file
+    - source_hash: ${1:root}
     - user: ${2:None}
-    - fingerprint: ${3:None}
-    - port: ${4:.ssh/known_hosts}
-    - enc: ${5:True}
-snippet layman.absent
-  layman:
-    - absent
-snippet layman.present
-  layman:
+    - template: ${3:None}
+    - context: ${4:True}
+    - replace: ${5:None}
+    - defaults: ${6:None}
+    - env: ${7:''}
+snippet cron.present
+  cron:
     - present
+    - user: ${1:*}
+    - minute: ${2:*}
+    - hour: ${3:*}
+    - daymonth: ${4:*}
+    - month: ${5:*}
+    - dayweek: ${6:None}
+    - comment: ${7:None}
+snippet status.loadavg
+  status:
+    - loadavg
+    - maximum: ${1:None}
+snippet gnomedesktop.desktop_interface
+  gnomedesktop:
+    - desktop_interface
+    - user: ${1:None}
+    - automatic_mnemonics: ${2:None}
+    - buttons_have_icons: ${3:None}
+    - can_change_accels: ${4:None}
+    - clock_format: ${5:None}
+    - clock_show_date: ${6:None}
+    - clock_show_seconds: ${7:None}
+    - cursor_blink: ${8:None}
+    - cursor_blink_time: ${9:None}
+    - cursor_blink_timeout: ${10:None}
+    - cursor_size: ${11:None}
+    - cursor_theme: ${12:None}
+    - document_font_name: ${13:None}
+    - enable_animations: ${14:None}
+    - font_name: ${15:None}
+    - gtk_color_palette: ${16:None}
+    - gtk_color_scheme: ${17:None}
+    - gtk_im_module: ${18:None}
+    - gtk_im_preedit_style: ${19:None}
+    - gtk_im_status_style: ${20:None}
+    - gtk_key_theme: ${21:None}
+    - gtk_theme: ${22:None}
+    - gtk_timeout_initial: ${23:None}
+    - gtk_timeout_repeat: ${24:None}
+    - icon_theme: ${25:None}
+    - menubar_accel: ${26:None}
+    - menubar_detachable: ${27:None}
+    - menus_have_icons: ${28:None}
+    - menus_have_tearoff: ${29:None}
+    - monospace_font_name: ${30:None}
+    - show_input_method_menu: ${31:None}
+    - show_unicode_menu: ${32:None}
+    - text_scaling_factor: ${33:None}
+    - toolbar_detachable: ${34:None}
+    - toolbar_icons_size: ${35:None}
+    - toolbar_style: ${36:None}
+snippet gnomedesktop.desktop_lockdown
+  gnomedesktop:
+    - desktop_lockdown
+    - user: ${1:None}
+    - disable_application_handlers: ${2:None}
+    - disable_command_line: ${3:None}
+    - disable_lock_screen: ${4:None}
+    - disable_log_out: ${5:None}
+    - disable_print_setup: ${6:None}
+    - disable_printing: ${7:None}
+    - disable_save_to_disk: ${8:None}
+    - disable_user_switching: ${9:None}
+snippet gnomedesktop.wm_preferences
+  gnomedesktop:
+    - wm_preferences
+    - user: ${1:None}
+    - action_double_click_titlebar: ${2:None}
+    - action_middle_click_titlebar: ${3:None}
+    - action_right_click_titlebar: ${4:None}
+    - application_based: ${5:None}
+    - audible_bell: ${6:None}
+    - auto_raise: ${7:None}
+    - auto_raise_delay: ${8:None}
+    - button_layout: ${9:None}
+    - disable_workarounds: ${10:None}
+    - focus_mode: ${11:None}
+    - focus_new_windows: ${12:None}
+    - mouse_button_modifier: ${13:None}
+    - num_workspaces: ${14:None}
+    - raise_on_click: ${15:None}
+    - resize_with_right_button: ${16:None}
+    - theme: ${17:None}
+    - titlebar_font: ${18:None}
+    - titlebar_uses_system_font: ${19:None}
+    - visual_bell: ${20:None}
+    - visual_bell_type: ${21:None}
+snippet mysql_database.absent
+  mysql_database:
+    - absent
+snippet mysql_database.present
+  mysql_database:
+    - present
+snippet keyboard.system
+  keyboard:
+    - system
+snippet keyboard.xorg
+  keyboard:
+    - xorg
+snippet alias.absent
+  alias:
+    - absent
+snippet alias.present
+  alias:
+    - present
+snippet eselect.set_
+  eselect:
+    - set_
+snippet zcbuildout.installed
+  zcbuildout:
+    - installed
+    - config: ${1:False}
+    - quiet: ${2:None}
+    - parts: ${3:None}
+    - runas: ${4:None}
+    - user: ${5:()}
+    - env: ${6:None}
+    - buildout_ver: ${7:False}
+    - test_release: ${8:None}
+    - distribute: ${9:None}
+    - new_st: ${10:False}
+    - offline: ${11:False}
+    - newest: ${12:/usr/bin/python}
+    - python: ${13:False}
+    - debug: ${14:False}
+    - verbose: ${15:None}
+    - unless: ${16:None}
+snippet incron.absent
+  incron:
+    - absent
+snippet incron.present
+  incron:
+    - present
+snippet mongodb_database.absent
+  mongodb_database:
+    - absent
+    - user: ${1:None}
+    - password: ${2:None}
+    - host: ${3:None}
+snippet npm.bootstrap
+  npm:
+    - bootstrap
+    - runas: ${1:None}
+snippet npm.installed
+  npm:
+    - installed
+    - dir: ${1:None}
+    - runas: ${2:None}
+    - user: ${3:False}
+snippet npm.removed
+  npm:
+    - removed
+    - dir: ${1:None}
+    - runas: ${2:None}
+snippet tomcat.mod_watch
+  tomcat:
+    - mod_watch
+    - url: ${1:180}
+snippet tomcat.wait
+  tomcat:
+    - wait
+    - url: ${1:180}
+snippet tomcat.war_deployed
+  tomcat:
+    - war_deployed
+    - war: ${1:180}
+snippet iptables.append
+  iptables:
+    - append
+snippet iptables.chain_absent
+  iptables:
+    - chain_absent
+    - table: ${1:ipv4}
+snippet iptables.chain_present
+  iptables:
+    - chain_present
+    - table: ${1:ipv4}
+snippet iptables.delete
+  iptables:
+    - delete
+snippet iptables.flush
+  iptables:
+    - flush
+snippet iptables.insert
+  iptables:
+    - insert
+snippet iptables.set_policy
+  iptables:
+    - set_policy
+snippet user.absent
+  user:
+    - absent
+    - purge: ${1:False}
+snippet user.present
+  user:
+    - present
+    - uid: ${1:None}
+    - gid: ${2:False}
+    - gid_from_name: ${3:None}
+    - groups: ${4:None}
+    - optional_groups: ${5:True}
+    - remove_groups: ${6:None}
+    - home: ${7:True}
+    - createhome: ${8:None}
+    - password: ${9:True}
+    - enforce_password: ${10:None}
+    - shell: ${11:True}
+    - unique: ${12:False}
+    - system: ${13:None}
+    - fullname: ${14:None}
+    - roomnumber: ${15:None}
+    - workphone: ${16:None}
+snippet ntp.managed
+  ntp:
+    - managed
+snippet alternatives.auto
+  alternatives:
+    - auto
+snippet alternatives.install
+  alternatives:
+    - install
+snippet alternatives.remove
+  alternatives:
+    - remove
+snippet alternatives.set_
+  alternatives:
+    - set_
+snippet rabbitmq_vhost.absent
+  rabbitmq_vhost:
+    - absent
+snippet rabbitmq_vhost.present
+  rabbitmq_vhost:
+    - present
+    - user: ${1:None}
+    - owner: ${2:None}
+    - conf: ${3:None}
+    - write: ${4:None}
+    - read: ${5:None}
+snippet dockerio.absent
+  dockerio:
+    - absent
+snippet dockerio.built
+  dockerio:
+    - built
+    - path: ${1:False}
+    - quiet: ${2:False}
+    - nocache: ${3:True}
+    - rm: ${4:False}
+    - force: ${5:None}
+snippet dockerio.installed
+  dockerio:
+    - installed
+    - image: ${1:None}
+    - command: ${2:None}
+    - hostname: ${3:True}
+    - user: ${4:False}
+    - detach: ${5:False}
+    - stdin_open: ${6:0}
+    - tty: ${7:None}
+    - mem_limit: ${8:None}
+    - ports: ${9:None}
+    - environment: ${10:None}
+    - dns: ${11:None}
+snippet dockerio.mod_watch
+  dockerio:
+    - mod_watch
+snippet dockerio.present
+  dockerio:
+    - present
+snippet dockerio.pulled
+  dockerio:
+    - pulled
+snippet dockerio.run
+  dockerio:
+    - run
+    - cid: ${1:None}
+    - hostname: ${2:False}
+    - stateful: ${3:None}
+    - onlyif: ${4:None}
+    - unless: ${5:None}
+    - docked_onlyif: ${6:None}
+snippet dockerio.running
+  dockerio:
+    - running
+    - container: ${1:None}
+    - port_bindings: ${2:None}
+    - binds: ${3:False}
+    - publish_all_ports: ${4:None}
+    - links: ${5:None}
+    - lxc_conf: ${6:False}
+snippet dockerio.script
+  dockerio:
+    - script
+    - cid: ${1:None}
+    - hostname: ${2:None}
+    - state_id: ${3:False}
+    - stateful: ${4:None}
+    - onlyif: ${5:None}
+    - unless: ${6:None}
+    - docked_onlyif: ${7:None}
+snippet timezone.system
+  timezone:
+    - system
+snippet postgres_group.absent
+  postgres_group:
+    - absent
+    - runas: ${1:None}
+    - user: ${2:None}
+    - maintenance_db: ${3:None}
+    - db_password: ${4:None}
+    - db_host: ${5:None}
+    - db_port: ${6:None}
+snippet postgres_group.present
+  postgres_group:
+    - present
+    - createdb: ${1:None}
+    - createroles: ${2:None}
+    - createuser: ${3:None}
+    - encrypted: ${4:None}
+    - superuser: ${5:None}
+    - inherit: ${6:None}
+    - login: ${7:None}
+    - replication: ${8:None}
+    - password: ${9:None}
+    - groups: ${10:None}
+    - runas: ${11:None}
+    - user: ${12:None}
+    - maintenance_db: ${13:None}
+    - db_password: ${14:None}
+    - db_host: ${15:None}
+    - db_port: ${16:None}
+snippet composer.installed
+  composer:
+    - installed
+    - composer: ${1:None}
+    - php: ${2:None}
+    - runas: ${3:None}
+    - user: ${4:None}
+    - prefer_source: ${5:None}
+    - prefer_dist: ${6:None}
+    - no_scripts: ${7:None}
+    - no_plugins: ${8:None}
+    - optimize: ${9:None}
+    - no_dev: ${10:/root}
