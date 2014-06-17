@@ -21,36 +21,36 @@ You are welcome to help me complete this instruction.
 
 1. Save the ``snippets/`` directory somewhere vim can find, like:
 
-```sh
-cd ~/.vim/
-git clone https://github.com/StephenPCG/vim-snippets-salt/
-# you may also only copy the snippets/ directory here
-```
+   ```sh
+   cd ~/.vim/
+   git clone https://github.com/StephenPCG/vim-snippets-salt/
+   # you may also only copy the snippets/ directory here
+   ```
 
 2. Add the ``snippets/`` directory to ``g:neosnippet#snippets_directory``:
 
-```vim
-" g:neosnippet#snippets_directory is a comma-seperated string or list,
-" I prefer using list.
-let g:neosnippet#snippets_directory = [$HOME . "/.vim/vim-snippets-salt/snippets/"]
-```
+   ```vim
+   " g:neosnippet#snippets_directory is a comma-seperated string or list,
+   " I prefer using list.
+   let g:neosnippet#snippets_directory = [$HOME . "/.vim/vim-snippets-salt/snippets/"]
+   ```
 
 3. Since different versions of salt have different amount of states functions,
-you can generate snippets for each version you need. Snippets are named as
-``sls-$version.sls``, so you need to set ``g:neosnippet#scope_alias`` to tell
-neosnippet which file to use. e.g.
+   you can generate snippets for each version you need. Snippets are named as
+   ``sls-$version.sls``, so you need to set ``g:neosnippet#scope_alias`` to tell
+   neosnippet which file to use. e.g.
 
-```vim
-" g:neosnippet#scope_aliases is a dictionary, initialize it if you haven't done it
-let g:neosnippet#scope_aliases = {}
-let g:neosnippet#scope_aliases['sls'] = 'sls-0.17.2'
-```
+   ```vim
+   " g:neosnippet#scope_aliases is a dictionary, initialize it if you haven't done it
+   let g:neosnippet#scope_aliases = {}
+   let g:neosnippet#scope_aliases['sls'] = 'sls-0.17.2'
+   ```
 
-``scope_aliases[filetype]`` is a comma-seperated string, all listed variant
-snippets will be loaded, so make sure you only list one here, or multiple versions
-if you realy need.
+   ``scope_aliases[filetype]`` is a comma-seperated string, all listed variant
+   snippets will be loaded, so make sure you only list one here, or multiple versions
+   if you realy need.
 
-For vim-snipmate, there is also a ``g:snipMate.scope_aliases`` which does the same thing.
+   For vim-snipmate, there is also a ``g:snipMate.scope_aliases`` which does the same thing.
 
 Generating Snippets
 ----------------------
